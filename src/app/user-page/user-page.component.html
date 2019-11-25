@@ -1,0 +1,24 @@
+<div class="content-wrapper">
+  <div class="l-search-bar">
+    {{userName }}
+  </div>
+  <div class="l-search-result " [@stagger]="postList.length">
+    <ng-container *ngFor="let post of postList">
+      <mat-card class="post-wrapper">
+        <mat-card-header>
+          <mat-card-title class="content-header">
+            <blockquote>
+              <h3>
+                {{post.title}}
+              </h3>
+            </blockquote>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="content-text">
+          {{post.body}}
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+
+</div>

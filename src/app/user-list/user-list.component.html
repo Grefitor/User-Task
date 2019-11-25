@@ -1,0 +1,64 @@
+<form class="content-wrapper" [formGroup]="searchForm">
+  <div class="search-bar">
+    <mat-form-field class="full-width" color="primary" appearance="outline">
+      <mat-label>Search User</mat-label>
+      <input type="text" #value formControlName="search" matInput [matAutocomplete]="auto" autofocus="true" (keyup.enter)="enterClicked(value.value)">
+       <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name"
+           (click)="optionClicked(option)">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <div class="search-result mat-elevation-z5">
+    <ng-container *ngFor="let user of userList">
+      <mat-card (click)="optionClicked(user)" class="example-card user-info-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{user.name}}
+          </mat-card-title>
+          <mat-card-subtitle>{{user.username}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="info-row email">
+            <label class="email-text">{{user.email}}</label>
+            <hr class="divider">
+          </div>
+          <div class="company-details">
+            <div class="content-header">
+              <blockquote>
+                <h3>
+                  Company
+                </h3>
+              </blockquote>
+            </div>
+            <div class="company-name">
+              {{user.company.name}}
+            </div>
+          </div>
+          <div class="contact-details">
+             <div class="content-header">
+               <blockquote>
+                 <h3>
+                   Contact Details
+                 </h3>
+               </blockquote>
+             </div>
+             <div class="address-content">
+                <div class="address-text">
+                  {{user.address.street+", "+ user.address.suite+", " + user.address.city +', ' + user.address.zipcode}}
+                </div>
+                <div class="phone-text">
+                  {{user.phone}}
+                </div>
+                 <div class="website-text">
+                   (Website){{" "+user.website}}
+                 </div>
+             </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+</form>
